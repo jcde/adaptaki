@@ -1,0 +1,29 @@
+{
+  "name": "adaptaki",
+  "displayName": "Adaptaki",
+  "expo": {
+    "name": "adaptaki",
+    "slug": "adaptaki_logy",
+    "privacy": "unlisted",
+    "sdkVersion": "37.0.0",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "ios": {
+      "bundleIdentifier": "gq.logy.Adaptaki"
+    },
+    "android": {
+      "package": "gq.logy.Adaptaki"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "packagerOpts": {
+      "port": 18000
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "entryPoint": "node_modules/expo/AppEntry.js",
+    "description": ""
+  }
+}
