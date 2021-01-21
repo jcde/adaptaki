@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { StyleSheet, View, Text, SafeAreaView, SectionList, Button, TextInput, NativeSyntheticEvent, TextInputSubmitEditingEventData, TouchableOpacity } from 'react-native'
 import { CheckBox } from 'react-native-elements'
+import '@expo/match-media'
+import { useMediaQuery } from "react-responsive"
 
 const Adaptaki = () => {
   const [error, setError] = useState(null)
@@ -189,7 +191,7 @@ const Adaptaki = () => {
   const Theme = ({ e }) => (
     <View style={styles.headerrow}>
       <View style={styles.item}>
-        <CheckBox title={e.item.theme} checked={isThemeChecked(e.section.key, e.item.key)}
+        <CheckBox title={e.item.theme} checked={isThemeChecked(e.section.key, e.item.key)} containerStyle={{ padding: 0 }}
           onPress={() => dispatch({ type: 'model', value: newModelAfterThemeRechecked(e.section.key, e.item.key) })} />
         <Text style={styles.theme}></Text>
       </View>
@@ -199,9 +201,13 @@ const Adaptaki = () => {
         onSubmitEditing={ev => themeCountChanged(e.section.key, e.item.key, ev)} style={styles.input} />
       <But onPress={ev => themeCountChanged(e.section.key, e.item.key, 1)}
         disabled={isThemeChecked(e.section.key, e.item.key) >= e.item.count} fontSize={20}>+</But>
-      <Text style={{ fontSize: 14, marginLeft: 20 }}>{'из ' + e.item.count}</Text>
+      <Text style={{ fontSize: 12, marginLeft: 4 }}>{'из ' + e.item.count}</Text>
     </View>
   )
+
+  const isLandscape = useMediaQuery({
+    minDeviceWidth: 768,
+  })
 
   return (
     <View>
@@ -211,25 +217,28 @@ const Adaptaki = () => {
         </View>
       </View>
       <View style={styles.row}>
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={{ flex: 2, marginRight: 4 }}>
           <SectionList
             sections={DATA}
             renderSectionHeader={({ section }) => <Header section={section} />}
             renderItem={(e) => <Theme e={e} />}
           />
         </SafeAreaView>
+        {isLandscape &&
+          <View style={styles.container} >
+            <Text style={{ fontSize: 24, borderWidth: 1 }}>{JSON.stringify(model)}</Text>
+            <Button title='json to console' onPress={() => console.log(JSON.stringify(model))} />
+          </View>
+        }
+      </View>
+      {!isLandscape &&
         <View style={styles.container} >
-          <Text style={{ fontSize: 24, borderWidth: 1, flexBasis: '70%' }}>{JSON.stringify(model)}</Text>
+          <Text style={{ fontSize: 24, borderWidth: 1 }}>{JSON.stringify(model)}</Text>
           <Button title='json to console' onPress={() => console.log(JSON.stringify(model))} />
         </View>
-      </View>
+      }
     </View>
   )
-}
-
-const headerrow = {
-  flexDirection: 'row',
-  alignItems: 'center',
 }
 
 const styles = StyleSheet.create({
@@ -237,21 +246,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   container: {
-    flex: 2,
-    marginHorizontal: 4
+    flexBasis: '30%',
+    marginRight: 2
   },
 
-  headerrow: headerrow,
-  headerrow4item: {
-    ...headerrow,
-    marginLeft: 30,
+  headerrow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 
   header: {
     fontSize: 24,
     flexBasis: '80%',
     marginLeft: 10,
-    backgroundColor: "#d6d1cf",
+    backgroundColor: "##e5e4ec",
   },
   item: {
     flexBasis: '70%',
@@ -260,7 +268,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#e4f1ea",
   },
   theme: {
-    fontSize: 18
+    //margin: 0,
+    fontSize: 18,
   },
 
   button: {
@@ -277,6 +286,6 @@ const styles = StyleSheet.create({
     padding: 5,
     fontSize: 16,
   },
-});
+})
 
 export default Adaptaki
