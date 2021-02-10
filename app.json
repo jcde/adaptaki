@@ -5,7 +5,7 @@
     "name": "adaptaki",
     "slug": "adaptaki_logy",
     "privacy": "unlisted",
-    "sdkVersion": "37.0.0",
+    "sdkVersion": "40.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
     "ios": {
@@ -24,6 +24,7 @@
       "**/*"
     ],
     "entryPoint": "node_modules/expo/AppEntry.js",
-    "description": ""
+    "description": "",
+    "githubUrl": "https://github.com/jcde/adaptaki"
   }
 }

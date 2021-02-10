@@ -183,7 +183,7 @@ const Adaptaki = () => {
         {section.subject}
       </Text>
       <But onPress={e => sectionCountChanged(section.key, -1)} disabled={!sectionCount(section.key)} >‒</But>
-      <TextInput placeholder={sectionCount(section.key)}
+      <TextInput placeholder={sectionCount(section.key)+''}
         onSubmitEditing={e => sectionCountChanged(section.key, e)} style={styles.input} />
       <But onPress={e => sectionCountChanged(section.key, 1)} >+</But>
     </View>
@@ -191,13 +191,13 @@ const Adaptaki = () => {
   const Theme = ({ e }) => (
     <View style={styles.headerrow}>
       <View style={styles.item}>
-        <CheckBox title={e.item.theme} checked={isThemeChecked(e.section.key, e.item.key)} containerStyle={{ padding: 0 }}
+        <CheckBox title={e.item.theme} checked={isThemeChecked(e.section.key, e.item.key)!=0} containerStyle={{ padding: 0 }}
           onPress={() => dispatch({ type: 'model', value: newModelAfterThemeRechecked(e.section.key, e.item.key) })} />
         <Text style={styles.theme}></Text>
       </View>
       <But onPress={ev => themeCountChanged(e.section.key, e.item.key, -1)}
         disabled={!isThemeChecked(e.section.key, e.item.key)} fontSize={20}>‒</But>
-      <TextInput placeholder={isThemeChecked(e.section.key, e.item.key)}
+      <TextInput placeholder={isThemeChecked(e.section.key, e.item.key)+''}
         onSubmitEditing={ev => themeCountChanged(e.section.key, e.item.key, ev)} style={styles.input} />
       <But onPress={ev => themeCountChanged(e.section.key, e.item.key, 1)}
         disabled={isThemeChecked(e.section.key, e.item.key) >= e.item.count} fontSize={20}>+</But>
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     flexBasis: '80%',
     marginLeft: 10,
-    backgroundColor: "##e5e4ec",
+    backgroundColor: "#e5e4ec",
   },
   item: {
     flexBasis: '70%',
